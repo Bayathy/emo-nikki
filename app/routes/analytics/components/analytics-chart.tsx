@@ -70,7 +70,6 @@ export function AnalyticsChart() {
                       axisLine={false}
                       tickMargin={10}
                       fontSize={10}
-                      fontWeight={600}
                       tickFormatter={value => format(value, "long", "ja").split("年")[1]}
                     />
                     <Bar dataKey="positive" fill="var(--color-positive)" radius={6} onClick={handleClick}>
