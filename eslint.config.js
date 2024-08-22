@@ -9,7 +9,7 @@ import tailwindcss from "eslint-plugin-tailwindcss";
 import { fixupPluginRules } from "@eslint/compat";
 import reactPlugin from "@eslint-react/eslint-plugin";
 import stylisticPlugin from "@stylistic/eslint-plugin";
-import { fixupConfigRules } from "@eslint/compat";
+import unusedImports from "eslint-plugin-unused-imports";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
@@ -32,6 +32,7 @@ export default tseslint.config(
       ["simple-import-sort"]: simpleImport,
       ["@stylistic"]: stylisticPlugin,
       ["tailwindcss"]: tailwindcss,
+      ["unused-imports"]: unusedImports
     },
     settings: {
       react: {
@@ -51,6 +52,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...tailwindcss.configs["flat/recommended"],
+  stylisticPlugin.configs['recommended-flat'],
 
   {
     rules: {
@@ -102,6 +104,17 @@ export default tseslint.config(
       "import/no-self-import": "error",
       "import/prefer-default-export": "off",
       "simple-import-sort/imports": "error",
+      "@typescript-eslint/no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+          "warn",
+          {
+              "vars": "all",
+              "varsIgnorePattern": "^_",
+              "args": "after-used",
+              "argsIgnorePattern": "^_",
+          },
+      ]
     },
   },
   {
