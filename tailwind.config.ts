@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      height: {
+        footer: "var(--footer-height)",
+      },
       gridTemplateColumns: {
         1: "repeat(1, minmax(0, 1fr))",
         2: "repeat(2, minmax(0, 1fr))",
