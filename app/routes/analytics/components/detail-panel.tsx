@@ -20,7 +20,7 @@ export function DetailPanel() {
       {selectDate
         ? (
           <>
-            <div className="flex flex-col gap-4 px-4">
+            <div className="flex flex-col gap-4 px-4 pb-16">
               <div className="flex justify-between">
                 <h2 className="flex w-max items-center justify-center gap-2 rounded-xl text-xl font-bold text-white">
                   <CalendarCog />
