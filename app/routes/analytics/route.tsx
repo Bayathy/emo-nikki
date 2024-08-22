@@ -15,7 +15,7 @@ export const meta: MetaFunction = () => {
 
 export default function Analytics() {
   return (
-    <div className="grid min-h-screen grid-cols-[100%] grid-rows-[auto_auto_1fr]">
+    <div className="grid min-h-screen grid-cols-[100%] grid-rows-[auto_auto_1fr_var(--footer-height)]">
       <header>
         <h1 className="p-4 text-xl font-semibold">最近の自分</h1>
       </header>
