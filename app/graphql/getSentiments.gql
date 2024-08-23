@@ -1,0 +1,8 @@
+query GetSentiments($uid: String!) {
+  sentiments(where: {uid: {_eq: $uid}}) {
+    date
+    negative
+    positive
+    uid
+  }
+}
