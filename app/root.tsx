@@ -54,16 +54,20 @@ export default function App() {
 
   useEffect(() => {
     liff.init({ liffId: LiffID }).then(() => {
-      liff.getProfile().then((profile) => {
-        fetch("/api/session", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: profile.userId }),
-        });
-      },
-      );
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        liff.getProfile().then((profile) => {
+          fetch("/api/session", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId: profile.userId }),
+          });
+        },
+        );
+      }
     },
     );
   }
