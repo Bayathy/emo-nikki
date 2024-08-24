@@ -22,6 +22,7 @@ export default tseslint.config(
       "build/",
       "worker-configuration.d.ts",
       "load-context.ts",
+      "**/*/generated.ts",
     ],
   },
   {

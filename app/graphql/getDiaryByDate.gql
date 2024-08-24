@@ -1,0 +1,11 @@
+query GetDiaryByDate($uid: String!, $date: date!) {
+  users(where: {uid: {_eq: $uid}, sentiments: {date: {_eq: $date}}}) {
+		sentiments {
+      negative
+      positive
+    }
+    diaries {
+      text
+    } 
+  }
+}

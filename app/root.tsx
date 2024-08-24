@@ -1,13 +1,16 @@
 import "./tailwind.css";
 
-import { LinksFunction } from "@remix-run/cloudflare";
+import liff from "@line/liff";
+import { LinksFunction, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+import { useEffect } from "react";
 
 import { Tab } from "./shared/ui/tab";
 
@@ -38,6 +41,33 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export async function loader({ context }: LoaderFunctionArgs) {
+  const env = context.cloudflare.env as Env;
+
+  const LiffID = env.LIFF_ID as string;
+
+  return { LiffID };
+}
+
 export default function App() {
+  const { LiffID } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    liff.init({ liffId: LiffID }).then(() => {
+      liff.getProfile().then((profile) => {
+        fetch("/api/session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: profile.userId }),
+        });
+      },
+      );
+    },
+    );
+  }
+  , [LiffID]);
+
   return <Outlet />;
 }

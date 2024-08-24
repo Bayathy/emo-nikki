@@ -31,7 +31,6 @@ const config = {
         7: "repeat(7, minmax(0, 1fr))",
       },
       colors: {
-        // "pastel-primary": "#EC8F5E",
         "pastel-primary": "hsl(var(--chart-1))",
         "pastel-secondary": "hsl(var(--chart-2))",
         "pastel-tertiary": "rgb(20, 145, 101)",

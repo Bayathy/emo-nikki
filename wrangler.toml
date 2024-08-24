@@ -1,0 +1,9 @@
+name = "emo-nikki"
+compatibility_date = "2024-08-20"
+
+vars = {HASURA_ENDPOINT = "", HASURA_ADMIN_SECRET = "", LIFF_ID = ""}
+
+[[kv_namespaces]]
+binding = "SESSION_KV"
+id = "7b556ba0f57f423d903ffe09b2ec1cca"
+preview_id = "c7d8694de60941a6b6af106b894f9233"
