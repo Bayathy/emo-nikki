@@ -52,18 +52,18 @@ export default function Analytics() {
               <div className="w-full">
                 <AnalyticsChart sentiments={sentiments} />
               </div>
-              <div className="mt-12">
-                <div className="relative top-2 grid w-max place-items-center rounded-[8px_8px_0px_0px] bg-pastel-primary px-4 py-2 ">
-                  <h1 className="font-semibold text-white">記録</h1>
-                </div>
-                <div className="h-full bg-pastel-primary pt-8">
-                  <DetailPanel />
-                </div>
-              </div>
             </>
           )}
         </Await>
       </Suspense>
+      <div className="mt-12">
+        <div className="relative top-2 grid w-max place-items-center rounded-[8px_8px_0px_0px] bg-pastel-primary px-4 py-2 ">
+          <h1 className="font-semibold text-white">記録</h1>
+        </div>
+        <div className="h-full bg-pastel-primary pt-8">
+          <DetailPanel />
+        </div>
+      </div>
     </div>
   );
 }

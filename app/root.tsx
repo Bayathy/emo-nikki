@@ -1,5 +1,6 @@
 import "./tailwind.css";
 
+import liff from "@line/liff";
 import { LinksFunction, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import {
   Links,
@@ -52,13 +53,17 @@ export default function App() {
   const { LiffID } = useLoaderData<typeof loader>();
 
   useEffect(() => {
-    // liff.init({ liffId: LiffID });
-    fetch("/api/session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    liff.init({ liffId: LiffID }).then(() => {
+      liff.getProfile().then((profile) => {
+        fetch("/api/session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: profile.userId }),
+        });
       },
-      body: JSON.stringify({ userId: "U73d6dd134c7a7832362ad064447b959f" }),
+      );
     },
     );
   }

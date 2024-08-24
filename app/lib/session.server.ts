@@ -8,6 +8,7 @@ const sessionCookie = createCookie("__session", {
   httpOnly: true,
   path: "/",
   sameSite: true,
+  maxAge: 60 * 60 * 24 * 7,
   secrets: ["r3m1xr0ck5"],
   secure: true,
 });

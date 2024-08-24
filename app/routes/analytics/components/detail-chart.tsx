@@ -3,17 +3,17 @@ import { Pie, PieChart } from "recharts";
 import { ANALYTICS_CHART_CONFIG } from "~/lib/chart-config";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "~/shared/ui/chart";
 
-type DetailChartData = {
-  emotion: string
-  amount: number
-  fill: string
-}[];
-
 type Props = {
-  detailChartData: DetailChartData
+  positive: number
+  negative: number
 };
 
-export function DetailChart({ detailChartData }: Props) {
+export function DetailChart({ positive, negative }: Props) {
+  const detailChartData = [
+    { emotion: "positive", amount: positive, fill: "hsl(var(--chart-1))" },
+    { emotion: "negative", amount: negative, fill: "hsl(var(--chart-2))" },
+  ];
+
   return (
     <div className="grid size-32 items-center rounded-xl bg-white">
       <ChartContainer
