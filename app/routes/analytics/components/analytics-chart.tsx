@@ -14,34 +14,38 @@ export type ChartData = {
   negative: number
 };
 
-const chartData: ChartData[] = [
-  { date: "2024-08-22T08:36:51.427Z", positive: 186, negative: 80 },
-  { date: "2024-08-23T08:36:51.427Z", positive: 305, negative: 200 },
-  { date: "2024-08-24T08:36:51.427Z", positive: 237, negative: 120 },
-  { date: "2024-08-25T08:36:51.427Z", positive: 73, negative: 190 },
-  { date: "2024-08-26T08:36:51.427Z", positive: 209, negative: 130 },
-  { date: "2024-08-27T08:36:51.427Z", positive: 214, negative: 140 },
-  { date: "2024-08-28T08:36:51.427Z", positive: 186, negative: 80 },
-  { date: "2024-08-29T08:36:51.427Z", positive: 305, negative: 200 },
-  { date: "2024-08-30T08:36:51.427Z", positive: 237, negative: 120 },
-  { date: "2024-09-01T08:36:51.427Z", positive: 73, negative: 190 },
-  { date: "2024-09-02T08:36:51.427Z", positive: 209, negative: 130 },
-  { date: "2024-09-03T08:36:51.427Z", positive: 214, negative: 140 },
-  { date: "2024-09-04T08:36:51.427Z", positive: 186, negative: 80 },
-  { date: "2024-09-05T08:36:51.427Z", positive: 305, negative: 200 },
-  { date: "2024-09-06T08:36:51.427Z", positive: 237, negative: 120 },
-  { date: "2024-09-07T08:36:51.427Z", positive: 73, negative: 190 },
-  { date: "2024-09-08T08:36:51.427Z", positive: 209, negative: 130 },
-  { date: "2024-09-09T08:36:51.427Z", positive: 214, negative: 140 },
-  { date: "2024-09-10T08:36:51.427Z", positive: 186, negative: 80 },
-  { date: "2024-09-11T08:36:51.427Z", positive: 305, negative: 200 },
-  { date: "2024-09-12T08:36:51.427Z", positive: 237, negative: 120 },
-  { date: "2024-09-13T08:36:51.427Z", positive: 73, negative: 190 },
-  { date: "2024-09-14T08:36:51.427Z", positive: 209, negative: 130 },
-  { date: "2024-09-15T08:36:51.427Z", positive: 214, negative: 140 },
-];
+// const chartData: ChartData[] = [
+//   { date: "2024-08-22T08:36:51.427Z", positive: 186, negative: 80 },
+//   { date: "2024-08-23T08:36:51.427Z", positive: 305, negative: 200 },
+//   { date: "2024-08-24T08:36:51.427Z", positive: 237, negative: 120 },
+//   { date: "2024-08-25T08:36:51.427Z", positive: 73, negative: 190 },
+//   { date: "2024-08-26T08:36:51.427Z", positive: 209, negative: 130 },
+//   { date: "2024-08-27T08:36:51.427Z", positive: 214, negative: 140 },
+//   { date: "2024-08-28T08:36:51.427Z", positive: 186, negative: 80 },
+//   { date: "2024-08-29T08:36:51.427Z", positive: 305, negative: 200 },
+//   { date: "2024-08-30T08:36:51.427Z", positive: 237, negative: 120 },
+//   { date: "2024-09-01T08:36:51.427Z", positive: 73, negative: 190 },
+//   { date: "2024-09-02T08:36:51.427Z", positive: 209, negative: 130 },
+//   { date: "2024-09-03T08:36:51.427Z", positive: 214, negative: 140 },
+//   { date: "2024-09-04T08:36:51.427Z", positive: 186, negative: 80 },
+//   { date: "2024-09-05T08:36:51.427Z", positive: 305, negative: 200 },
+//   { date: "2024-09-06T08:36:51.427Z", positive: 237, negative: 120 },
+//   { date: "2024-09-07T08:36:51.427Z", positive: 73, negative: 190 },
+//   { date: "2024-09-08T08:36:51.427Z", positive: 209, negative: 130 },
+//   { date: "2024-09-09T08:36:51.427Z", positive: 214, negative: 140 },
+//   { date: "2024-09-10T08:36:51.427Z", positive: 186, negative: 80 },
+//   { date: "2024-09-11T08:36:51.427Z", positive: 305, negative: 200 },
+//   { date: "2024-09-12T08:36:51.427Z", positive: 237, negative: 120 },
+//   { date: "2024-09-13T08:36:51.427Z", positive: 73, negative: 190 },
+//   { date: "2024-09-14T08:36:51.427Z", positive: 209, negative: 130 },
+//   { date: "2024-09-15T08:36:51.427Z", positive: 214, negative: 140 },
+// ];
 
-export function AnalyticsChart() {
+type Props = {
+  sentiments: ChartData[]
+};
+
+export function AnalyticsChart({ sentiments }: Props) {
   const [selectDate, setSelectDate] = useAtom(selectDateAtom);
 
   const handleClick = (data: ChartData) => {
@@ -52,11 +56,11 @@ export function AnalyticsChart() {
     <Carousel className="w-full px-4">
       <CarouselContent>
         {
-          chunk(chartData, 7).map((data, index) => (
+          chunk(sentiments, 7).map((data, index) => (
             // eslint-disable-next-line @eslint-react/no-array-index-key
             <CarouselItem key={index}>
               <div className="flex flex-col rounded-xl bg-white p-2">
-                <p>
+                <p suppressHydrationWarning>
                   {format(data[0].date, "long")}
                   〜
                   {format(data.slice(-1)[0].date, "long")}
@@ -86,7 +90,6 @@ export function AnalyticsChart() {
                     </Bar>
                   </BarChart>
                 </ChartContainer>
-                {/* <WeeklyEmotionList chartData={data} /> */}
               </div>
             </CarouselItem>
           ))

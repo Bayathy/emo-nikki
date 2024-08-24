@@ -27,8 +27,10 @@ const config: CodegenConfig = {
         "typescript-graphql-request",
       ],
       config: {
+        useTypeImports: true,
         scalars: {
           uuid: "string",
+          date: "string",
         },
         avoidOptionals: {
           field: true,
@@ -36,6 +38,7 @@ const config: CodegenConfig = {
           object: true,
           defaultValue: false,
         },
+        skipTypename: true,
       },
     },
   },

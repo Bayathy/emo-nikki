@@ -3,6 +3,5 @@ query GetSentiments($uid: String!) {
     date
     negative
     positive
-    uid
   }
 }
