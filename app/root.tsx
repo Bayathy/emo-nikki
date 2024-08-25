@@ -53,21 +53,24 @@ export default function App() {
   const { LiffID } = useLoaderData<typeof loader>();
 
   useEffect(() => {
-    liff.init({ liffId: LiffID }).then(() => {
-      if (!liff.isLoggedIn()) {
-        liff.login();
-      } else {
-        liff.getProfile().then((profile) => {
+    liff.init({ liffId: "2006140926-bJgW5A4z" }).then(() => {
+      liff.ready.then(() => {
+        if (liff.isLoggedIn()) {
+          const context = liff.getContext();
+          const liffToken = liff.getAccessToken();
+
           fetch("/api/session", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${liffToken}`,
             },
-            body: JSON.stringify({ userId: profile.userId }),
+            body: JSON.stringify({ userId: context!.userId }),
           });
-        },
-        );
-      }
+        } else {
+          liff.login();
+        }
+      });
     },
     );
   }
