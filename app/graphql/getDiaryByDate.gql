@@ -6,6 +6,10 @@ query GetDiaryByDate($uid: String!, $date: date!) {
     }
     diaries {
       text
-    } 
+    }
+    questions {
+      question
+      answer
+    }
   }
 }

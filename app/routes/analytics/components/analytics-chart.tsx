@@ -56,43 +56,51 @@ export function AnalyticsChart({ sentiments }: Props) {
     <Carousel className="w-full px-4">
       <CarouselContent>
         {
-          chunk(sentiments, 7).map((data, index) => (
-            // eslint-disable-next-line @eslint-react/no-array-index-key
-            <CarouselItem key={index}>
-              <div className="flex flex-col rounded-xl bg-white p-2">
-                <p suppressHydrationWarning>
-                  {format(data[0].date, "long")}
-                  〜
-                  {format(data.slice(-1)[0].date, "long")}
-                </p>
-                <ChartContainer config={ANALYTICS_CHART_CONFIG}>
-                  <BarChart accessibilityLayer data={data} className="w-full">
-                    <CartesianGrid vertical={false} />
-                    <XAxis
-                      dataKey="date"
-                      tickLine={false}
-                      axisLine={false}
-                      tickMargin={10}
-                      fontSize={11}
-                      tickFormatter={value => format(value, "long", "ja").split("年")[1]}
-                    />
-                    <Bar dataKey="positive" fill="var(--color-positive)" radius={6} onClick={handleClick}>
-                      {selectDate && data.map((entry, index) => (
-                      // eslint-disable-next-line @eslint-react/no-array-index-key
-                        <Cell opacity={selectDate == entry.date ? "1" : "0.5"} cursor="pointer" key={`cell-${index}`} />
-                      ))}
-                    </Bar>
-                    <Bar dataKey="negative" fill="var(--color-negative)" radius={6} onClick={handleClick}>
-                      {selectDate && data.map((entry, index) => (
-                      // eslint-disable-next-line @eslint-react/no-array-index-key
-                        <Cell opacity={selectDate == entry.date ? "1" : "0.5"} cursor="pointer" key={`cell-${index}`} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ChartContainer>
-              </div>
-            </CarouselItem>
-          ))
+          sentiments.length > 0
+            // eslint-disable-next-line @stylistic/multiline-ternary
+            ? chunk(sentiments, 7).map((data, index) => (
+              // eslint-disable-next-line @eslint-react/no-array-index-key
+              <CarouselItem key={index}>
+                <div className="flex flex-col rounded-xl bg-white p-2">
+                  <p suppressHydrationWarning>
+                    {format(data[0].date, "long")}
+                    〜
+                    {format(data.slice(-1)[0].date, "long")}
+                  </p>
+                  <ChartContainer config={ANALYTICS_CHART_CONFIG}>
+                    <BarChart accessibilityLayer data={data} className="w-full">
+                      <CartesianGrid vertical={false} />
+                      <XAxis
+                        dataKey="date"
+                        tickLine={false}
+                        axisLine={false}
+                        tickMargin={10}
+                        fontSize={11}
+                        tickFormatter={value => format(value, "long", "ja").split("年")[1]}
+                      />
+                      <Bar dataKey="positive" fill="var(--color-positive)" radius={6} onClick={handleClick}>
+                        {selectDate && data.map((entry, index) => (
+                          // eslint-disable-next-line @eslint-react/no-array-index-key
+                          <Cell opacity={selectDate == entry.date ? "1" : "0.5"} cursor="pointer" key={`cell-${index}`} />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="negative" fill="var(--color-negative)" radius={6} onClick={handleClick}>
+                        {selectDate && data.map((entry, index) => (
+                          // eslint-disable-next-line @eslint-react/no-array-index-key
+                          <Cell opacity={selectDate == entry.date ? "1" : "0.5"} cursor="pointer" key={`cell-${index}`} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ChartContainer>
+                </div>
+              </CarouselItem>
+            )) : (
+              <CarouselItem>
+                <div className="flex h-[245px] flex-col items-center justify-center rounded-xl bg-white p-2">
+                  <p>データがありません</p>
+                </div>
+              </CarouselItem>
+            )
         }
       </CarouselContent>
       <CarouselPrevious className="left-0" />

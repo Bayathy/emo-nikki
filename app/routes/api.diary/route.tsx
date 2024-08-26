@@ -24,7 +24,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
     const diary = users[0]?.diaries[0];
     const sentiments = users[0]?.sentiments[0];
+    const questions = users[0]?.questions[0];
 
-    return json({ diary, sentiments });
+    return json({ diary, sentiments, questions });
   }
 }
