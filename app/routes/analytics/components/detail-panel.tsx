@@ -84,7 +84,7 @@ export function DetailPanel() {
                                     <p className="text-sm text-white">質問</p>
                                     <div className="rounded-[0px_8px_8px_8px] bg-pastel-tertiary p-2">
                                       <p className="text-xs text-white">
-
+                                        {diary.data.questions.question}
                                       </p>
                                     </div>
                                   </div>
@@ -95,7 +95,9 @@ export function DetailPanel() {
                                   <div className="flex flex-1 flex-col gap-1">
                                     <p className="text-end text-xs text-white">回答</p>
                                     <div className="rounded-[8px_0px_8px_8px] bg-white p-2">
-                                      <p className="text-sm">季節の移り変わりを感じる瞬間に、私はしばしば懐かしさと新しい始まりの期待感を感じます。例えば、夏の終わりの涼しさを感じると、子供の頃の夏休みの終わりや、新学期が始まる前のわくわく感を思い出します。</p>
+                                      <p className="text-sm">
+                                        {diary.data.questions.answer}
+                                      </p>
                                     </div>
                                   </div>
                                   <div className="w-max rounded-full bg-white p-1">
