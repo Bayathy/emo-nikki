@@ -2397,7 +2397,7 @@ export const GetDiaryByDateDocument = gql`
     `;
 export const GetSentimentsDocument = gql`
     query GetSentiments($uid: String!) {
-  sentiments(where: {uid: {_eq: $uid}}) {
+  sentiments(where: {uid: {_eq: $uid}}, order_by: {date: asc}) {
     date
     negative
     positive
