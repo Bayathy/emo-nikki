@@ -11,7 +11,7 @@ import { DetailPanel } from "./components/detail-panel";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Emory" },
     {
       name: "description",
       content: "Welcome to Remix on Cloudflare!",
@@ -45,7 +45,7 @@ export default function Analytics() {
       <header>
         <h1 className="p-4 text-xl font-semibold">最近の自分</h1>
       </header>
-      <Suspense fallback={<p>loading</p>}>
+      <Suspense fallback={<div className="grid h-[245px] place-items-center"><p>loading</p></div>}>
         <Await resolve={data}>
           {({ sentiments }) => (
             <>
