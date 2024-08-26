@@ -63,21 +63,14 @@ export default function App() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ userId: "U73d6dd134c7a7832362ad064447b959f" }),
+            body: JSON.stringify({ userId: context?.userId }),
           });
         } else {
-          // liff.login();
+          liff.login();
         }
       });
     },
     );
-    fetch("/api/session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: "U73d6dd134c7a7832362ad064447b959f" }),
-    });
   }
   , [LiffID]);
 
